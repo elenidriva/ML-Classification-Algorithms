@@ -8,14 +8,20 @@ import java.io.IOException;
 // Will output.txt be used? -> Statistics etc?
 // Clean-up after implementing Naive Bayes + decision on output.txt
 // Iteration through the whole Folder
-
-
+/* *******TEXT PROCESSING*********
+* Prepare the text so that it's suitable for tokenization and stopWord-filtering
+* xDeterminers: the, a, an, another
+* xCoordinating Conjunctions: for, an, nor, but, or, yet, so
+* xPrepositions: in, under, towards, before
+* Add more Words. Ref: https://towardsdatascience.com/machine-learning-text-processing-1d5a2d638958
+* */
 
 public class NaiveBayes {
 	private Category category;
 	private static final String FILENAME = "C:/Users/ele_1/ML/NaiveBayes/0006.2003-12-18.GP.spam.txt";
-	private String[] stopWords = {"about","and","are","com","for","from","how",
-            "that","the","this", "was","what","when","where","who","will","with","und","the","www"};
+	private String[] stopWords = {"about","a","an","like","of","to", "at","on","be","and","is","are","was","com","nor","for","from","how",
+            "that","the","it","this","so", "was","what","when","where","who","will","with","und","but","www", "under", "towards",
+            "before","in"};
 	ArrayList <String> keyWords = new ArrayList<String>();
 	Map<ArrayList<String>, Category> trainingSet = new HashMap<>();
 	Map<String, Integer> wordFrequencySpam = new HashMap<>();
