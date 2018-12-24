@@ -10,9 +10,7 @@ import java.io.IOException;
 // Iteration through the whole Folder
 /* *******TEXT PROCESSING*********
 * Prepare the text so that it's suitable for tokenization and stopWord-filtering
-* xDeterminers: the, a, an, another
-* xCoordinating Conjunctions: for, an, nor, but, or, yet, so
-* xPrepositions: in, under, towards, before
+*
 * Add more Words. Ref: https://towardsdatascience.com/machine-learning-text-processing-1d5a2d638958
 * */
 
