@@ -10,9 +10,9 @@ public class Main {
 		NaiveBayes NBSpam = new NaiveBayes();
         File file = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spam");
         File[] files = file.listFiles();
-        File f = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spam/0697.2004-03-22.GP.spam.txt");
+        //File f = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spam/0697.2004-03-22.GP.spam.txt");
         System.out.println("Training Spam files");
-        //for(File f: files){
+        for(File f: files){
         	Scanner s = new Scanner(f);
         	ArrayList<String> list = new ArrayList<String>();
     		while (s.hasNext()){
@@ -22,8 +22,8 @@ public class Main {
     		System.out.println(list);
     		System.out.println(list.size());
            NBSpam.train( list, Category.Spam);
-            NBSpam.classify( list);
-        //}
+            NBSpam.classify(list);
+        }
 	
 	//b.train(args);
 

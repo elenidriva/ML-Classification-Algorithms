@@ -1,12 +1,12 @@
 import java.util.*;
+import java.lang.Math;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-// TODO Implement Naive Bayes. Clean-up after implementing Naive Bayes
+// TODO  No debugging done
 // Will output.txt be used? -> Statistics etc?
 // Clean-up after implementing Naive Bayes + decision on output.txt
-// Add Ham training
 // Iteration through the whole Folder
 
 
@@ -18,6 +18,8 @@ public class NaiveBayes {
             "that","the","this", "was","what","when","where","who","will","with","und","the","www"};
 	ArrayList <String> keyWords = new ArrayList<String>();
 	Map<ArrayList<String>, Category> trainingSet = new HashMap<>();
+	Map<String, Integer> wordFrequencySpam = new HashMap<>();
+	Map<String, Integer> wordFrequencyHam = new HashMap<>();
 	public NaiveBayes() {
 	
 	}
@@ -39,12 +41,12 @@ public class NaiveBayes {
 		trainingSet.put(list, category);
 		if (category == spam) {
 			keyWords.addAll(tokenize(list, keyWords));
-			Map<String, Integer> wordFrequency = new HashMap<>();
+			//Map<String, Integer> wordFrequency = new HashMap<>();
 			for (String keyword : keyWords) {
 				//System.out.println(keyword);
-				Integer n = wordFrequency.get(keyword);
+				Integer n = wordFrequencySpam.get(keyword);
 				n = (n == null) ? 1 : ++n;
-				wordFrequency.put(keyword, n);
+				wordFrequencySpam.put(keyword, n);
 			}
 		}
 		/*
@@ -94,7 +96,14 @@ public class NaiveBayes {
 		
 		*/
 		if (category == ham) {
-		
+			keyWords.addAll(tokenize(list, keyWords));
+			//Map<String, Integer> wordFrequency = new HashMap<>();
+			for (String keyword : keyWords) {
+				//System.out.println(keyword);
+				Integer n = wordFrequencyHam.get(keyword);
+				n = (n == null) ? 1 : ++n;
+				wordFrequencyHam.put(keyword, n);
+			}
 		}
 	}
 	public Category classify(ArrayList<String> list) {
@@ -119,16 +128,44 @@ public class NaiveBayes {
 		Category ham = Category.Ham;
 		category = ham; //by def
 		trainingSet.size();
-		int SpamCount = 0;
-		int HamCount = 0;
+		double spamCount = 0;
+		double hamCount = 0;
 		for( Map.Entry<ArrayList<String>, Category> entry : trainingSet.entrySet()) {
 			if (entry.getValue() == spam) {
-				SpamCount++;
+				spamCount++;
 			}else
-				HamCount++;	
+				hamCount++;	
 		}
-		System.out.println("Spam Count:" + SpamCount);
-		System.out.println("Ham Count:"+ HamCount);
+		System.out.println("Spam Count:" + spamCount);
+		System.out.println("Ham Count:"+ hamCount);
+		double totalCount = spamCount + hamCount;
+		//Calculating P(Spam) & P(Ham)
+		double pSpam = spamCount / totalCount;
+		double pHam = spamCount / totalCount;
+		// Laplace Smoothing - Count of distinct words
+		double distinctWords = wordFrequencySpam.size();
+		// Use Log probability because we're dealing with small numbers
+		//Possible	precision problems ?
+		double emailIsSpam = Math.log(pSpam);
+		double emailIsHam = Math.log(pHam);
+		for(String keyword: keyWords) {
+			if (category==spam) {
+			Integer spamOccur = wordFrequencySpam.get(keyword);
+			emailIsSpam += Math.log((spamOccur+1)/ (spamCount + distinctWords)); // or wordFrequency.size()
+			}
+			
+			if (category==ham) {
+			Integer hamOccur = wordFrequencyHam.get(keyword);
+			emailIsHam += Math.log((hamOccur+1)/ (hamCount + distinctWords));
+			}
+			
+		}
+		
+		if(emailIsHam>= emailIsSpam) {
+			category = ham;
+		}else {
+			category = spam;
+		}
 		
 		
 		return category;
