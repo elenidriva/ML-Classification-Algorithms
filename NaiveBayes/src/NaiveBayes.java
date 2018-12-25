@@ -5,17 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-// TODO  No debugging done
-// Will output.txt be used? -> Statistics etc?
-// Clean-up after implementing Naive Bayes + decision on output.txt
-// Iteration through the whole Folder
-/* *******TEXT PROCESSING*********
-* Prepare the text so that it's suitable for tokenization and stopWord-filtering
-* xDeterminers: the, a, an, another
-* xCoordinating Conjunctions: for, an, nor, but, or, yet, so
-* xPrepositions: in, under, towards, before
-* Add more Words. Ref: https://towardsdatascience.com/machine-learning-text-processing-1d5a2d638958
-* */
+// TODO  stopWords not working to a satisfying level perhaps?
+// Test on lingspam_public dataset again -> got worse spam results
+// Curves/Percentages/Accuracy/Training Data/ Test Data -> Report
+// Clean-up unnecessary code, after using it for debugging.
+
 
 public class NaiveBayes {
 	private Category category;
@@ -48,6 +42,7 @@ public class NaiveBayes {
 		this.category = category;
 	}
 
+	
 	public void train(ArrayList<String> list, Category category) {
 		Category spam = Category.Spam;
 		Category ham = Category.Ham;
@@ -57,27 +52,24 @@ public class NaiveBayes {
 			spamCount++;
 			ArrayList <String> keyWords = new ArrayList<String>();
 			keyWords.addAll(tokenize(list));
-			//Map<String, Integer> wordFrequency = new HashMap<>();
 			for (String keyword : keyWords) {
 				//System.out.println(keyword);
 				Integer n = wordFrequencySpam.get(keyword);
 				n = (n == null) ? 1 : ++n;
 				wordFrequencySpam.put(keyword, n);
-				//System.out.println("Keyword&noOcc: "+ keyword+n);
-				
+				//System.out.println("Keyword&noOcc: "+ keyword+n);	
 			}
 			//System.out.println("WordFrequency-MAP Contains the following:");
 			//for(String key :wordFrequencySpam.keySet()) {
-			//System.out.println("timeskey:"+wordFrequencySpam.get(key)+ key);
+			//System.out.println("timesXkey:"+wordFrequencySpam.get(key)+ key);
 		
 			//}
 		}
-		
 		if (category == ham) {
 			hamCount++;
 			ArrayList <String> keyWords = new ArrayList<String>();
-			keyWords.addAll(tokenize(list)); //, keyWords)
-			//Map<String, Integer> wordFrequency = new HashMap<>();
+			keyWords.addAll(tokenize(list));
+			
 			for (String keyword : keyWords) {
 				//System.out.println(keyword);
 				Integer n = wordFrequencyHam.get(keyword);
@@ -86,11 +78,14 @@ public class NaiveBayes {
 			}
 		}
 	}
+	
+	
+	
 	public Category classify(ArrayList<String> list) {
 		ArrayList <String> keyWords = new ArrayList<String>();
 		keyWords = this.tokenize(list);
 		category = this.decide(keyWords);
-		System.out.println("++++++++++++++++++   "+ category+ "   ++++++++++++++++++");
+		System.out.println("************************   "+ category+ "    ***************************");
 		return category;
 	}
 
@@ -118,14 +113,13 @@ public class NaiveBayes {
 		double pSpam = spamCount / totalCount;
 		double pHam = hamCount / totalCount;
 		// Laplace Smoothing - Count of distinct words
-		
-		double common = 0;
-		for( Entry<String, Integer> words: wordFrequencyHam.entrySet()) {
-			if(wordFrequencySpam.get(words)!=null) {
-				common++;
+		double commonW = 0;
+		for( Entry<String, Integer> word: wordFrequencyHam.entrySet()) {
+			if(wordFrequencySpam.get(word)!=null) {
+				commonW++;
 			}
 		}
-		double distinctWords = wordFrequencySpam.size()+wordFrequencyHam.size() -(2*common );
+		double distinctWords = wordFrequencySpam.size()+wordFrequencyHam.size() -(2*commonW);
 		//System.out.println(wordFrequencySpam.size());
 		//System.out.println(wordFrequencyHam.size());
 		// Use Log probability because we're dealing with small numbers
@@ -172,7 +166,7 @@ public class NaiveBayes {
 	
 	
 	private ArrayList<String> tokenize(ArrayList<String> list) { //, ArrayList<String> keyWords)
-		//System.out.println("Inside tokenizer");
+		
 		ArrayList <String> keyWords = new ArrayList<String>();
 		for(int i=0; i<list.size(); i++) {
 			String word = list.get(i);

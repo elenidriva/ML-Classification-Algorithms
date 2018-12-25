@@ -8,8 +8,11 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
+		/* ************************** *
+		 * T R A I N I N G   S P A M  *
+		 * ************************** */
         File spamFolder = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spamTrain");
-		//File spamFolder = new File("C:/Users/ele_1/ML/NaiveBayes/part1/spam");
+		//File spamFolder = new File("C:/Users/ele_1/ML/NaiveBayes/part1/spam"); LingSpam DataSet
         File[] spamFiles = spamFolder.listFiles();
         for(File f: spamFiles) {
         	 NaiveBayes NBSpam = new NaiveBayes(Category.Spam);
@@ -25,8 +28,12 @@ public class Main {
     		
         }
         
+		/* ************************** *
+		 * T R A I N I N G   H A M    *
+		 * ************************** */
+        
        File folder = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/hamTrain");
-     //   File folder = new File("C:/Users/ele_1/ML/NaiveBayes/part1/legit");
+     //File folder = new File("C:/Users/ele_1/ML/NaiveBayes/part1/legit"); LingSpam DataSet
         File[] files = folder.listFiles();
         for(File f: files) {
         	 NaiveBayes NBHam = new NaiveBayes(Category.Ham);
@@ -44,11 +51,15 @@ public class Main {
         System.out.println("Press Any Key To Continue...");
         new java.util.Scanner(System.in).nextLine();
         
+		/* *************************** *
+		 * C L A S S I F I C A T I O N *
+		 * *************************** */
+        
+        System.out.println("*************CLASSIFICATION SECTION***************");
+        System.out.println("*************CLASSIFICATION SECTION***************");
+        System.out.println("*************CLASSIFICATION SECTION***************");
         
         
-        System.out.println("*************CLASSIFICATION SECTION***************");
-        System.out.println("*************CLASSIFICATION SECTION***************");
-        System.out.println("*************CLASSIFICATION SECTION***************");
         System.out.println("********** s p a m *************");
         File spamFolder1 = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spam1");
         File[] spamFiles1 = spamFolder1.listFiles();
@@ -65,15 +76,15 @@ public class Main {
    		    list.add(s.next());
    		}
    		s.close();
-   		
-
+   
    		if(NBSpam.classify(list)== Category.Spam) spamAccuracy++;
    		else hamAccuracy++;
 
        }
    		System.out.println("Number of Spam files examined"+ NospamFiles);
    		System.out.println("Number of Spam files classified in Spam"+ spamAccuracy);
-        /*
+        
+   		/*
         System.out.println("********** h a m *************");
         File spamFolder2 = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/ham1");
         File[] spamFiles2 = spamFolder2.listFiles();
@@ -101,44 +112,7 @@ public class Main {
    		System.out.println("Number of Ham files examined"+ NohamFiles);
    		System.out.println("Number of Ham files classified in Ham"+ hamAccuracy1);
        }
-
-        */
-        /*
-        //File f = new File("C:/Users/ele_1/ML/NaiveBayes/enron1/spam/0697.2004-03-22.GP.spam.txt");
-        System.out.println("Training Spam files");
-        for(File f: files){
-        	Scanner s = new Scanner(f);
-        	ArrayList<String> list = new ArrayList<String>();
-    		while (s.hasNext()){
-    		    list.add(s.next());
-    		}
-    		s.close();
-    		System.out.println(list);
-    		System.out.println(list.size());
-           NBSpam.train( list, Category.Spam);
-            NBSpam.classify(list);
-        }
-	*/
-	//b.train(args);
-
+*/
 	}
 }
 
-/*
-int i =0 ; 
-for(File f: files){
-	String str ="";
-	Scanner s = new Scanner(f);
-	ArrayList<String> list = new ArrayList<String>();
-	while (s.hasNext()){
-	    str+=s.next()+" ";
-	    
-	}
-	list.add(i,str);
-	i++;
-	s.close();
-	System.out.println(list);
-	System.out.println(list.size());
-	for (int y =0; y<list.size() ;y++){
-		System.out.println("List-get-i"+list.get(y));
-*/
