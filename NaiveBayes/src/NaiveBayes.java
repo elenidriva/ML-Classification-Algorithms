@@ -203,7 +203,7 @@ public class NaiveBayes {
 			
 		}
 		//System.out.println(list.size());
-		System.out.println(keyWords);
+		//System.out.println(keyWords);
 		return keyWords;
 
 
