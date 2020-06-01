@@ -1,0 +1,171 @@
+ We use the harmonic mean instead ofa simple average because
+ it punishes extreme values. A classifier with a precision of
+ 1.0 and a recall of 0.0 has a simple average of 0.5 but an F1
+ score of 0. The F1 score gives equal weight to both measures and
+ is a specific example of the general Fß metric where ß can be
+ adjusted to give more weight to either recall or precision.
+ (There are other metrics for combining precision and recall,
+ such as the Geometric Mean of precision and recall, but the F1 score
+ is the most commonly used.) If we want to create a balanced
+ classification model with the optimal balance of recall and
+ precision, then we try to maximize the F1 score.
+Accuracy: Works well if there are ~ equal number of samples belonging
+ to each class. For instance, if we have 98% Ham and 2% Spam, then our
+ model will get 98% accuracy by preditcting every training sample is Ham.
+
+*************10%train**************
+(tested)Spam files total: 1350.0
+(tested)Ham files total: 3313.0
+
+TP: 550 FP: 7 FN: 800 TN: 3306
+Spam Accuracy: 550/ 1350 = 40.74%
+Ham Accuracy: 3306 / 3313 =  99.78%
+
+PRECISION: 0.9874326750448833
+RECALL: 0.4074074074074074
+F1: 0.5768222338751966
+
+
+************20%train*****************
+Spam files total: 1200.0
+Ham files total: 2938.0
+
+TP: 570 FP: 3 FN: 630 TN: 2935
+Spam Accuracy: 570/ 1200 = 47.5%
+Ham Accuracy: 2935/ 2938=  99.89%
+
+PRECISION: 0.9947643979057592
+RECALL: 0.475
+F1: 0.6429780033840947
+
+************30%train*******************
+Spam files total: 1050.0
+Ham files total: 2571.0
+
+TP: 624 FP: 5 FN: 426 TN: 2566
+Spam Accuracy: 0.5942857142857143 = 59.42%
+Ham Accuracy: 0.9980552314274601 = 99.80%
+
+PRECISION: 0.9920508744038156
+RECALL: 0.5942857142857143
+F1: 0.7432995830851699
+
+***************40%train****************
+Spam files total: 900.0
+Ham files total: 2204.0
+
+Spam Accuracy: 0.6177777777777778 = 61.77%
+Ham Accuracy: 0.9977313974591652 = 99.77%
+TP: 556 FP: 5 FN: 344 TN: 2199
+
+PRECISION: 0.9910873440285205
+RECALL: 0.6177777777777778
+F1: 0.7611225188227242
+
+***************50%train******************
+Spam files total: 750.0
+Ham files total: 1837.0
+
+TP: 471 FP: 3 FN: 279 TN: 1834
+Spam Accuracy: 0.628 = 62.8%
+Ham Accuracy: 0.9983669025585193 = 99.83%
+
+PRECISION: 0.9936708860759493
+RECALL: 0.628
+F1: 0.7696078431372548
+
+******************60%train****************
+Spam files total: 600.0
+Ham files total: 1468.0
+
+TP: 457 FP: 3 FN: 143 TN: 1465
+Spam Accuracy: 0.7616666666666667 = 76.16%
+Ham Accuracy: 0.9979564032697548 = 99.79%
+
+PRECISION: 0.9934782608695653
+RECALL: 0.7616666666666667
+F1: 0.8622641509433964
+
+***************70%train******************
+Spam files total: 450.0
+Ham files total: 1101.0
+
+TP: 353 FP: 1 FN: 97 TN: 1100
+Spam Accuracy: 0.7844444444444445 = 78.44%
+Ham Accuracy: 0.9990917347865577 = 99.90%
+
+PRECISION: 0.9971751412429378
+RECALL: 0.7844444444444445
+F1: 0.8781094527363185
+
+****************80%train*******************
+Spam files total: 300.0
+Ham files total: 734.0
+
+TP: 247 FP: 2 FN: 53 TN: 732
+Spam Accuracy: 0.8233333333333334 = 82.3%
+Ham Accuracy: 0.997275204359673 = 99.72%
+
+PRECISION: 0.9919678714859438
+RECALL: 0.8233333333333334
+F1: 0.8998178506375228
+
+***************90%train******************
+Spam files total: 150.0
+Ham files total: 367.0
+
+TP: 126 FP: 1 FN: 24 TN: 366
+Spam Accuracy: 0.84 = 84%
+Ham Accuracy: 0.997275204359673 = 99.72%
+
+PRECISION: 0.9921259842519685
+RECALL: 0.84
+F1: 0.9097472924187726
+
+
+Data for Graphs
+https://www.chartgo.com/get.do?id=4d14a9ca6f
+Training Data (x-Axis)
+517
+1034
+1551
+2068
+2585
+3102
+3619
+4136
+4653
+
+Precision
+98.74%
+99.47%
+99.2%
+99.1%
+99.37%
+99.34%
+99.71%
+99.19%
+99.21%
+Recall
+40.74%
+47.5%
+59.42%
+61.77%
+62.8%
+76.16%
+78.4%
+82.33%
+84%
+
+F1
+57.68%
+64.29%
+74.32%
+76.11%
+76.96%
+86.22%
+87.81%
+89.98%
+90.97%
+
+
