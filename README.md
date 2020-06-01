@@ -15,7 +15,7 @@ Email tracking application for spam and ham messages - Message classification im
 
 ## General info
 I trained and assessed my classifier for different train-test splits (10/90, 20/80, 30/70, 40/60, 50/50,
-  60/40, 70/30, 80/20, 90/10) using EnronSpam and Ling-Spam datasets.
+  60/40, 70/30, 80/20, 90/10) using Enron-Spam and Ling-Spam datasets.
 
 The following metrics are used to assess the Classifier:
 * Accuracy
@@ -31,6 +31,10 @@ High accuracy and scores were achieved overall. Indicatively, for the 90/10 trai
 * F1: 90%
 
 ## Key features
+* DataSets: Enron-Spam and Ling-Spam
+The data inside the datasets do not belong to me, nor are the copyrights mine.
+They can both be found [here](http://www2.aueb.gr/users/ion/publications.html)
+
 * Laplace Smoothing
 In general, if the word "Art" does not exist in the category Ham (or Spam), then we have:
  P(art | Ham) = 0, leading to P(art and craft  | Ham) = 0
@@ -46,7 +50,11 @@ double pHam = hamCount / totalCount;
 // Log-probabilities.
 double emailIsSpam = Math.log(pSpam);
 double emailIsHam = Math.log(pHam);
-// As we can easily understand we are dealing with small numbers (and to be precise, we're dealing with numbers between 0 and 1) and we apply multiplication/division to them, which can lead to extremely tiny numbers, which is often impossible to represent them in double or long double.
+// As we can easily understand we are dealing with small numbers (and to be precise, we're dealing with
+
+// numbers between 0 and 1) and we apply multiplication/division to them, which can lead to extremely tiny
+
+//numbers, which is often impossible to represent them in double or long double.
 ```
 ## Technologies & Tools
 * Java 13
