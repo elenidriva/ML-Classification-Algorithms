@@ -32,11 +32,11 @@ High accuracy and scores were achieved overall. Indicatively, for the 90/10 trai
 * F1: 90%
 
 ## Key features
-* DataSets: Enron-Spam and Ling-Spam
+### DataSets: Enron-Spam and Ling-Spam
 The data inside the datasets do not belong to me, nor are the copyrights mine.
 They can both be found [here](http://www2.aueb.gr/users/ion/publications.html).
 
-* Laplace Smoothing
+### Laplace Smoothing
 In general, if the word "Art" does not exist in the category Ham (or Spam), then we have:
  P(art | Ham) = 0, leading to P(art and craft  | Ham) = 0
 It is problematic when a frequency-based probability is zero, because it will wipe out all the information in the other probabilities, and we need to find a solution for this.
